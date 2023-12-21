@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import bannerAnimation from "../../../../public/banner.json"
 import Lottie from "lottie-react";
 
@@ -9,7 +10,9 @@ const Banner = () => {
                 <div className="flex-1 space-y-3 p-4">
                     <h1 className="text-3xl lg:text-5xl font-bold">Effortless Task Management at Your Fingertips</h1>
                     <p>TaskMaster is your ultimate task management companion, designed to empower you in achieving your goals efficiently and effortlessly. Whether you&apos;re a busy professional, a student, or simply someone juggling multiple responsibilities, TaskMaste is here to streamline your tasks and boost your productivity.</p>
-                    <button className="btn">Let&apos;t Explore</button>
+                    <Link to="/login">
+                        <button className="btn mt-5">Let&apos;t Explore</button>
+                    </Link>
                 </div>
                 <div className="flex-1">
                     <Lottie
