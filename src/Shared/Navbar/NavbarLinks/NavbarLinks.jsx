@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 
 const NavbarLinks = () => {
+    const { user } = useContext(AuthContext)
     return (
         <>
             <li>
@@ -34,6 +37,19 @@ const NavbarLinks = () => {
                     Contact
                 </NavLink>
             </li>
+            {
+                user?.email && 
+                <li>
+                    <NavLink
+                        to="/dashboard"
+                        className={({ isActive, isPending }) =>
+                            isPending ? "pending" : isActive ? "active" : ""
+                        }
+                    >
+                        Dashboard
+                    </NavLink>
+                </li>
+            }
         </>
     );
 };
