@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
 
+import axios from "axios";
 import { useState } from "react";
 import { useDrag } from "react-dnd";
-import { FaRegCircleCheck } from "react-icons/fa6";
+import toast from "react-hot-toast";
+import { FaRegCircleCheck, FaTrash } from "react-icons/fa6";
 
-const TaskCard = ({ task }) => {
+const TaskCard = ({ task, refetch }) => {
     const [showModal, setShowModal] = useState(false)
     const [modal, setModal] = useState(false)
     const [clickedTask, setClickedTask] = useState({})
@@ -25,18 +27,33 @@ const TaskCard = ({ task }) => {
             isDragging: !!monitor.isDragging()
         })
     }))
+
+    const handleDeleteTask = (id) => {
+        console.log(id);
+        axios.delete(`http://localhost:5000/tasks/${id}`)
+        .then(data => {
+            console.log(data.data);
+            refetch()
+            if(data.data.deletedCount > 0){
+                toast.error("Task has been deleted")
+            }
+        })
+    }
     // console.log(isDragging);
     // console.log(clickedTask);
     return (
         <div>
-            <h1 ref={drag} onClick={() => handleTaskModal(task)} className={`p-3 flex justify-between cursor-pointer transform transition-transform duration-300 hover:scale-95 text-white rounded-3xl mb-1 ${isDragging ? "opacity-25" : "opacity-100"}`} style={cardStyle}>
-                <span>{title}</span>
-                {status === "on-going" && <span className="loading loading-spinner text-black"></span>
-}
-{
-    status === "complete" && <span><FaRegCircleCheck className="text-xl text-[#12e71d] font-bold"></FaRegCircleCheck></span>
-}
-            </h1>
+            <div className="flex items-center gap-2">
+                <h1 ref={drag} onClick={() => handleTaskModal(task)} className={`p-3 flex-[11] flex justify-between cursor-pointer transform transition-transform duration-300 hover:scale-95 text-white rounded-3xl mb-1 ${isDragging ? "opacity-25" : "opacity-100"}`} style={cardStyle}>
+                    <span>{title}</span>
+                    {status === "on-going" && <span className="loading loading-spinner text-black"></span>
+                    }
+                    {
+                        status === "complete" && <span><FaRegCircleCheck className="text-xl text-[#12e71d] font-bold"></FaRegCircleCheck></span>
+                    }
+                </h1>
+                <button onClick={()=> handleDeleteTask(_id)} className="btn btn-xs flex-1"><FaTrash className="text-red-600"></FaTrash></button>
+            </div>
 
             {
                 showModal &&

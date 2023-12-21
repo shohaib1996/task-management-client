@@ -57,21 +57,21 @@ const DashboardComponents = () => {
             <h1 className="text-center my-5 text-3xl font-bold">Your Tasks</h1>
             <div className="flex gap-5 justify-between p-2">
                 <div ref={dropToDo} className="flex-1 min-h-screen">
-                    <h1 className="text-center py-3 bg-[#008844] rounded-2xl mb-5 text-xl font-bold text-white">To Do</h1>
+                    <h1 className="text-center py-3 bg-[#008844] rounded-2xl mb-5 text-xl font-bold text-white">To Do <span className="px-1 w-8 h-8 ml-3 rounded-full bg-white text-black">{fToDo.length}</span></h1>
                     <div>
-                        {fToDo.map(task => <TaskCard key={task._id} task={task}></TaskCard>)}
+                        {fToDo.map(task => <TaskCard key={task._id} task={task} refetch={refetch}></TaskCard>)}
                     </div>
                 </div>
                 <div ref={dropOnGoing} className="flex-1 min-h-screen">
-                    <h1 className="text-center py-3 bg-[#12e71d] rounded-2xl mb-5 text-xl font-bold text-white">On Going</h1>
+                    <h1 className="text-center py-3 bg-[#12e71d] rounded-2xl mb-5 text-xl font-bold text-white">On Going <span className="px-1 w-8 h-8 ml-3 rounded-full bg-white text-black">{fOnGoing.length}</span></h1>
                     <div>
-                        {fOnGoing.map(task => <TaskCard key={task._id} task={task}></TaskCard>)}
+                        {fOnGoing.map(task => <TaskCard key={task._id} task={task} refetch={refetch}></TaskCard>)}
                     </div>
                 </div>
                 <div ref={dropCompleted} className="flex-1 min-h-screen">
-                    <h1 className="text-center py-3 bg-[#12e71dc4] rounded-2xl mb-5 text-xl font-bold text-white">Completed</h1>
+                    <h1 className="text-center py-3 bg-[#12e71dc4] rounded-2xl mb-5 text-xl font-bold text-white">Completed <span className="px-1 w-8 h-8 ml-3 rounded-full bg-white text-black">{fComplete.length}</span></h1>
                     <div>
-                        {fComplete.map(task => <TaskCard key={task._id} task={task}></TaskCard>)}
+                        {fComplete.map(task => <TaskCard key={task._id} task={task} refetch={refetch}></TaskCard>)}
                     </div>
                 </div>
             </div>
