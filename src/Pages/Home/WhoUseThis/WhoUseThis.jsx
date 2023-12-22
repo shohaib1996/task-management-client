@@ -4,7 +4,7 @@ import use from "../../../../public/use.json"
 const WhoUseThis = () => {
     return (
         <div className="flex justify-center gap-5 mb-20 mt-12 flex-col lg:flex-row max-w-6xl mx-auto">
-            <div className="flex-1">
+            <div className="flex-1" data-aos="fade-right" data-aos-duration="5000">
                 <Lottie
                     animationData={use}
                     loop={true}
@@ -13,7 +13,7 @@ const WhoUseThis = () => {
                 />
 
             </div>
-            <div className="flex-[2]">
+            <div className="flex-[2]" data-aos="fade-left" data-aos-duration="5000">
                 <h1 className="text-center text-3xl font-bold mb-5">Who Use This !!</h1>
                 <ul className="list-disc">
                     <li className="font-bold">Students: <span className="font-normal italic">Students use this for their study schedule, track assignments, and manage time effectively.</span></li>

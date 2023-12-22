@@ -6,11 +6,13 @@ import { useDrag } from "react-dnd";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FaRegCircleCheck, FaTrash } from "react-icons/fa6";
+import { Tooltip } from "react-tooltip";
 
 const TaskCard = ({ task, refetch }) => {
     const [showModal, setShowModal] = useState(false)
     const [modal, setModal] = useState(false)
     const [clickedTask, setClickedTask] = useState({})
+    const [editableTask, setEditableTask] = useState({})
     const { title, backgroundColor, _id, status } = task
 
     const cardStyle = {
@@ -20,6 +22,19 @@ const TaskCard = ({ task, refetch }) => {
         console.log(task);
         setClickedTask(task)
         setShowModal(true)
+        toast((t) => (
+            <span>
+                Task deadline <b>{task.deadline}</b>
+                <button className="btn btn-xs ml-2" onClick={() => toast.dismiss(t.id)}>
+                    Dismiss
+                </button>
+            </span>
+        ));
+    }
+    const handleEditModal = (task) => {
+        console.log("editable task", task);
+        setEditableTask(editableTask)
+
     }
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "task",
@@ -49,7 +64,7 @@ const TaskCard = ({ task, refetch }) => {
     } = useForm()
 
     const onSubmit = (data) => {
-        // console.log(data)
+        console.log(task._id)
         const splitData = data.priority.split(" ")
         // console.log(splitData);
         if (data.title.length > 70) {
@@ -61,7 +76,7 @@ const TaskCard = ({ task, refetch }) => {
             toast.error('Description cannot be more than 200 characters');
             return;
         }
-        const newTask = {
+        const updatedTask = {
             title: data.title,
             description: data.description,
             deadline: data.date,
@@ -70,14 +85,14 @@ const TaskCard = ({ task, refetch }) => {
             backgroundColor: splitData[1]
         }
         // console.log(newTask);
-        axios.post("http://localhost:5000/tasks", newTask)
+        axios.patch(`http://localhost:5000/tasks/${task._id}`, updatedTask)
             .then(res => {
                 console.log(res.data)
                 refetch()
-                if (res.data.insertedId) {
+                if (res.data.modifiedCount > 0) {
                     reset()
                     setModal(false)
-                    toast.success(`${data.title} task added`)
+                    toast.success(`${data.title} task updated`)
                 }
             })
             .catch(error => {
@@ -87,9 +102,11 @@ const TaskCard = ({ task, refetch }) => {
     }
     return (
         <div>
-            <div className="flex items-center gap-2">
-                <h1 ref={drag} onClick={() => handleTaskModal(task)} className={`p-3 flex-[11] flex justify-between cursor-pointer transform transition-transform duration-300 hover:scale-95 text-white rounded-3xl mb-1 ${isDragging ? "opacity-25" : "opacity-100"}`} style={cardStyle}>
-                    <span>{title}</span>
+            <div className="flex items-center gap-2" data-aos="flip-left" data-aos-duration="5000">
+                <h1 data-tooltip-id="my-tooltip" data-tooltip-content="click for details" ref={drag} onClick={() => handleTaskModal(task)} className={`p-3 flex-[11] flex justify-between cursor-pointer transform transition-transform duration-300 hover:scale-95 text-white rounded-3xl mb-1 ${isDragging ? "opacity-25" : "opacity-100"}`} style={cardStyle}>
+                <Tooltip id="my-tooltip" />
+                    <span >{title}</span>
+                  
                     {status === "on-going" && <span className="loading loading-spinner text-black"></span>
                     }
                     {
@@ -112,7 +129,7 @@ const TaskCard = ({ task, refetch }) => {
                         <p>Status: {clickedTask.status}</p>
                         <div className="modal-action">
                             <div method="dialog" className="space-x-5">
-                                <button onClick={() => setModal(true)} className="btn">Edit</button>
+                                <button onClick={() => { setModal(true); handleEditModal(clickedTask) }} className="btn">Edit</button>
                                 <button onClick={() => setShowModal(false)} className="btn">Close</button>
                             </div>
                         </div>
@@ -123,32 +140,32 @@ const TaskCard = ({ task, refetch }) => {
                 modal &&
                 <dialog id="my_modal_1" className="modal" open>
                     <div className="modal-box">
-                        <h3 className="font-bold text-lg">Hello!</h3>
+                        <h3 className="font-bold text-lg text-center">Update your task</h3>
                         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Task Title</span>
                                 </label>
-                                <input type="text" name="title" {...register("title")} placeholder="title" className="input input-bordered" required />
+                                <input type="text" defaultValue={task.title} name="title" {...register("title")} placeholder="title" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Description</span>
                                 </label>
-                                <input type="text" name="description" {...register("description")} placeholder="Task description" className="input input-bordered" required />
+                                <input type="text" defaultValue={task.description} name="description" {...register("description")} placeholder="Task description" className="input input-bordered" required />
                             </div>
                             <div className="grid grid-cols-2 gap-3">
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Deadline</span>
                                     </label>
-                                    <input type="date" name="date" {...register("date")} className="input input-bordered" required />
+                                    <input type="date" defaultValue={task.deadline} name="date" {...register("date")} className="input input-bordered" required />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Priority</span>
                                     </label>
-                                    <select name="Priority" {...register("priority")} className="select select-bordered w-full">
+                                    <select defaultValue={task.priority} name="Priority" {...register("priority")} className="select select-bordered w-full">
                                         <option disabled selected>Select Priority</option>
                                         <option value="high #EA3A77">High</option>
                                         <option value="moderate #FF02F0">Moderate</option>
@@ -158,7 +175,7 @@ const TaskCard = ({ task, refetch }) => {
                             </div>
                             <div className="modal-action">
                                 <div method="dialog" className="space-x-5">
-                                    <button className="btn btn-primary text-white">Add</button>
+                                    <button className="btn btn-primary text-white">Update</button>
                                     <button onClick={() => setModal(false)} className="btn bg-red-500 text-white">Close</button>
                                 </div>
                             </div>
