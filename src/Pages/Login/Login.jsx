@@ -5,13 +5,15 @@ import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { FaGithub } from "react-icons/fa6";
 
 
 const Login = () => {
-    const { signIn, googleSignIn, } = useContext(AuthContext)
+    const { signIn, googleSignIn,githubSignIn } = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
     const from = location.state?.from?.pathname || "/";
+    console.log(from);
     const {
         register,
         handleSubmit,
@@ -85,6 +87,7 @@ const Login = () => {
                                 </svg>
                                 Sign up with Google
                             </button>
+                            <button onClick={() => handleSocial(githubSignIn)} className="w-full py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800 hover:scale-110 hover:border-2 hover:border-green-600 mb-2 mt-2"><FaGithub className="w-4 h-auto"></FaGithub> Sign up with Github</button>
 
                         </div>
                         <p className="text-[#737373] text-center mt-2 text-lg">Don&apos;t have an account?  <Link to="/register"><span className="text-[#00bf58] font-bold text-lg">Register</span></Link></p>

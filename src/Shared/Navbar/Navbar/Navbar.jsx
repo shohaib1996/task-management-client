@@ -66,7 +66,7 @@ const Navbar = () => {
 
                             <div className="flex items-center">
                                 <Link to="/login">
-                                    <button className="btn btn-primary bg-[#99582a] text-white border-none font-bold hover:bg-[#e08c4fd3]">Join Us</button>
+                                    <button className="btn">Join Us</button>
                                 </Link>
                             </div>
 

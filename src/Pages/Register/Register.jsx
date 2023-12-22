@@ -7,13 +7,14 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { FaGithub } from "react-icons/fa6";
 
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 const Register = () => {
     const navigate = useNavigate()
-    const { createUser, logOut, updateUserProfile, googleSignIn } = useContext(AuthContext)
+    const { createUser, logOut, updateUserProfile, googleSignIn, githubSignIn } = useContext(AuthContext)
     const {
         register,
         handleSubmit,
@@ -122,6 +123,7 @@ const Register = () => {
                                 </svg>
                                 Sign up with Google
                             </button>
+                            <button onClick={() => handleSocial(githubSignIn)} className="w-full py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800 hover:scale-110 hover:border-2 hover:border-green-600 mb-2 mt-2"><FaGithub className="w-4 h-auto"></FaGithub> Sign up with Github</button>
 
                         </div>
                         <p className="text-[#737373] text-center mt-2 text-lg">Already have an account?  <Link to="/login"><span className="text-[#00bf58] font-bold text-lg">Sign In</span></Link></p>

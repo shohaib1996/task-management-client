@@ -5,7 +5,8 @@
     "deadline": "2023-02-15",
     "priority": "high",
     "backgroundColor": "#EA3A77",
-    "status": "to-do"
+    "status": "to-do",
+    "email" : "fuler@tora.com"
   },
   {
     "title": "Meeting with Team",
@@ -13,7 +14,8 @@
     "deadline": "2023-02-10",
     "priority": "moderate",
     "backgroundColor": "#FF02F0",
-    "status": "to-do"
+    "status": "to-do",
+    "email" : "fuler@tora.com"
   },
   {
     "title": "Update Website Content",
@@ -21,7 +23,8 @@
     "deadline": "2023-02-20",
     "priority": "low",
     "backgroundColor": "#AA6AE2",
-    "status": "to-do"
+    "status": "to-do",
+    "email" : "fuler@tora.com"
   },
   {
     "title": "Prepare Presentation",
@@ -29,7 +32,8 @@
     "deadline": "2023-02-18",
     "priority": "high",
     "backgroundColor": "#EA3A77",
-    "status": "to-do"
+    "status": "to-do",
+    "email" : "fuler@tora.com"
   },
   {
     "title": "Monthly Report",
@@ -37,7 +41,8 @@
     "deadline": "2023-02-28",
     "priority": "moderate",
     "backgroundColor": "#FF02F0",
-    "status": "to-do"
+    "status": "to-do",
+    "email" : "fuler@tora.com"
   },
   {
     "title": "Review Budget",
@@ -45,7 +50,8 @@
     "deadline": "2023-02-25",
     "priority": "low",
     "backgroundColor": "#AA6AE2",
-    "status": "to-do"
+    "status": "to-do",
+    "email" : "fuler@tora.com"
   },
   {
     "title": "Client Follow-up",
@@ -53,7 +59,8 @@
     "deadline": "2023-02-12",
     "priority": "high",
     "backgroundColor": "#EA3A77",
-    "status": "to-do"
+    "status": "to-do",
+    "email" : "fuler@tora.com"
   },
   {
     "title": "Bug Fixes",
@@ -61,7 +68,8 @@
     "deadline": "2023-02-22",
     "priority": "moderate",
     "backgroundColor": "#FF02F0",
-    "status": "to-do"
+    "status": "to-do",
+    "email" : "fuler@tora.com"
   },
   {
     "title": "Content Marketing Plan",
@@ -69,7 +77,8 @@
     "deadline": "2023-02-28",
     "priority": "low",
     "backgroundColor": "#AA6AE2",
-    "status": "to-do"
+    "status": "to-do",
+    "email" : "fuler@tora.com"
   },
   {
     "title": "Team Building Workshop",
@@ -77,6 +86,7 @@
     "deadline": "2023-03-05",
     "priority": "high",
     "backgroundColor": "#EA3A77",
-    "status": "to-do"
+    "status": "to-do",
+    "email" : "fuler@tora.com"
   }
 ]

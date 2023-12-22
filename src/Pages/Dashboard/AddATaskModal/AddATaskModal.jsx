@@ -1,11 +1,14 @@
 /* eslint-disable react/prop-types */
 
 import axios from "axios";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 
 const AddATaskModal = ({ showModal, setShowModal, refetch }) => {
+    const {user} = useContext(AuthContext)
     const {
         register,
         handleSubmit,
@@ -31,7 +34,8 @@ const AddATaskModal = ({ showModal, setShowModal, refetch }) => {
             deadline: data.date,
             status: "to-do",
             priority: splitData[0],
-            backgroundColor: splitData[1]
+            backgroundColor: splitData[1],
+            email: user?.email
         }
         // console.log(newTask);
         axios.post("http://localhost:5000/tasks", newTask)
