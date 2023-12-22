@@ -1,19 +1,14 @@
 /* eslint-disable no-unused-vars */
-import { useQuery } from "@tanstack/react-query";
+
 import axios from "axios";
 import TaskCard from "./TaskCard/TaskCard";
 import { useDrop } from "react-dnd";
 import toast from "react-hot-toast";
+import useTasks from "../hookes/useTasks";
 
 const DashboardComponents = () => {
-    const { data: tasks = [], refetch } = useQuery({
-        queryKey: ["tasks"],
-        queryFn: async () => {
-            const res = await axios.get("http://localhost:5000/tasks");
-            const data = await res.data;
-            return data;
-        }
-    });
+    const [tasks, refetch] = useTasks()
+    
 
     const fToDo = tasks.filter(task => task.status === "to-do");
     const fOnGoing = tasks.filter(task => task.status === "on-going");
