@@ -15,7 +15,7 @@ const DashboardComponents = () => {
     const fComplete = tasks.filter(task => task.status === "complete");
 
     const addItemToSection = (id, newStatus) => {
-        axios.put(`http://localhost:5000/tasks/${id}`, { status: newStatus })
+        axios.put(`https://task-management-server-snowy-seven.vercel.app/tasks/${id}`, { status: newStatus })
             .then((data) => {
                 refetch();
                 console.log(data.data);

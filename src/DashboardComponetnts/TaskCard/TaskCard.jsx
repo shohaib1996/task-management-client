@@ -46,7 +46,7 @@ const TaskCard = ({ task, refetch }) => {
 
     const handleDeleteTask = (id) => {
         console.log(id);
-        axios.delete(`http://localhost:5000/tasks/${id}`)
+        axios.delete(`https://task-management-server-snowy-seven.vercel.app/tasks/${id}`)
             .then(data => {
                 console.log(data.data);
                 refetch()
@@ -85,7 +85,7 @@ const TaskCard = ({ task, refetch }) => {
             backgroundColor: splitData[1]
         }
         // console.log(newTask);
-        axios.patch(`http://localhost:5000/tasks/${task._id}`, updatedTask)
+        axios.patch(`https://task-management-server-snowy-seven.vercel.app/tasks/${task._id}`, updatedTask)
             .then(res => {
                 console.log(res.data)
                 refetch()

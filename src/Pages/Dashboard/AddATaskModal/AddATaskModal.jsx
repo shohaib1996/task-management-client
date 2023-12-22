@@ -38,7 +38,7 @@ const AddATaskModal = ({ showModal, setShowModal, refetch }) => {
             email: user?.email
         }
         // console.log(newTask);
-        axios.post("http://localhost:5000/tasks", newTask)
+        axios.post("https://task-management-server-snowy-seven.vercel.app/tasks", newTask)
             .then(res => {
                 console.log(res.data)
                 refetch()
